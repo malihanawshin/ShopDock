@@ -43,7 +43,7 @@
           class="md-layout-item md-size-25 md-xsmall-size-100 md-small-size-50 md-medium-size-25"
         >
           <div class="title">
-            <h3>Select range </h3>
+            <h3>Select distance range </h3>
           </div>
           <div class="flex-column">
             <md-radio v-model="radio4" :value="true"> 500 meters </md-radio>
@@ -74,7 +74,32 @@
           <md-button class="md-primary"> Search </md-button>
         </div>
       </div>
-</div>
+
+<div class="space-40"></div>
+
+<div class="md-layout">
+        <div
+          class="md-layout-item md-size-20 md-xsmall-size-100"
+          :class="{ 'text-center': responsive }"
+        >
+          
+          <img
+            :src="image"
+            alt="Rounded Image"
+            class="rounded"
+            :class="{ 'responsive-image': responsive }"
+          />
+          <div>
+            <h4>Shop name: </h4>
+            <h4>Location: </h4>
+            <h4>Price range: </h4>
+          </div>
+
+        </div>
+  </div>
+
+  </div>
+
 </template>
 
 <script>
@@ -84,6 +109,7 @@ export default {
   },
   data() {
     return {
+      image: require("@/assets/img/faces/shopImg.jpg"),
       initial: null,
       floatingLabel: null,
       success: null,
