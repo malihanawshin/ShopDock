@@ -8,28 +8,9 @@
           >
             <login-card header-color="green">
               <h4 slot="title" class="card-title">Login</h4>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                <i class="fab fa-facebook-square"></i>
-              </md-button>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                
-              </md-button>
-              <md-button
-                slot="buttons"
-                href="javascript:void(0)"
-                class="md-just-icon md-simple md-white"
-              >
-                <i class="fab fa-google-plus-g"></i>
-              </md-button>
-              <p slot="description" class="description">Or Be Classical</p>
+              
+              
+              <p slot="description" class="description">Go business owners!</p>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
                 <label>First Name...</label>
@@ -45,7 +26,7 @@
                 <label>Password...</label>
                 <md-input v-model="password"></md-input>
               </md-field>
-              <md-button slot="footer" class="md-simple md-success md-lg">
+              <md-button href="#/profile" slot="footer" class="md-simple md-success md-lg">
                 Get Started
               </md-button>
             </login-card>

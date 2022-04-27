@@ -8,22 +8,17 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
-            </a>
-          </li>
-          <li>
-            <a href="https:///presentation.creative-tim.com">
+            <a href="#/landing">
               About Us
             </a>
           </li>
           <li>
-            <a href="https:///blog.creative-tim.com">
+            <a href="#/landing">
               Blog
             </a>
           </li>
           <li>
-            <a href="https://www.creative-tim.com/license">
+            <a href="#/landing">
               Licenses
             </a>
           </li>

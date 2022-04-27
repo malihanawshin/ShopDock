@@ -60,29 +60,9 @@
               class="md-layout-item md-size-33 md-medium-size-40 md-small-size-50 md-xsmall-size-70 mx-auto text-center"
             >
               <login-card header-color="green">
-                <h4 slot="title" class="card-title">Login</h4>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  
-                </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  
-                </md-button>
-                <md-button
-                  slot="buttons"
-                  href="javascript:void(0)"
-                  class="md-just-icon md-simple md-white"
-                >
-                  
-                </md-button>
-                
+                <h4 slot="title" class="card-title">Small business owner?</h4>
+                <h4 slot="title" class="card-title">Register here!</h4>
+                                
                 <md-field class="md-form-group" slot="inputs">
                   <md-icon>face</md-icon>
                   <label>First Name...</label>
@@ -101,18 +81,15 @@
                 <md-button slot="footer" class="md-simple md-success md-lg">
                   Get Started
                 </md-button>
+                <md-button slot="footer" class="md-simple md-success md-lg" href="#/login">
+                Or Login
+              </md-button>
               </login-card>
             </div>
           </div>
         </div>
       </div>
-      <div class="md-layout">
-        <div class="md-layout-item text-center">
-          <md-button href="#/login" class="md-simple md-success md-lg"
-            >View Login Page</md-button
-          >
-        </div>
-      </div>
+      
       <div class="section section-examples">
         <div class="container-fluid text-center">
           <div class="md-layout">
@@ -125,7 +102,7 @@
                 />
               </a>
               <md-button href="#/landing" class="md-simple md-success md-lg"
-                >View Landing Page</md-button
+                >About Us</md-button
               >
             </div>
             <div class="md-layout-item">
@@ -137,7 +114,7 @@
                 />
               </a>
               <md-button href="#/profile" class="md-simple md-success md-lg"
-                >View Profile Page</md-button
+                >View Your Business Profile</md-button
               >
             </div>
           </div>

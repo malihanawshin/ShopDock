@@ -14,12 +14,12 @@
                   <img
                     :src="img"
                     alt="Circle Image"
-                    class="img-raised rounded-circle img-fluid"
+                    class="img-raised rounded"
                   />
                 </div>
                 <div class="name">
-                  <h3 class="title">Carla Hortensia</h3>
-                  <h6>Designer</h6>
+                  <h3 class="title">Kontti</h3>
+                  <h6>Second hand shop</h6>
                   <md-button
                     href="javascript:void(0)"
                     class="md-just-icon md-simple md-dribbble"
@@ -140,7 +140,7 @@ export default {
     },
     img: {
       type: String,
-      default: require("@/assets/img/faces/christian.jpg")
+      default: require("@/assets/img/faces/shopImg.jpg")
     }
   },
   computed: {
