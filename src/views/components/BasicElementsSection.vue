@@ -19,9 +19,9 @@
             <h3>Choose product type </h3>
           </div>
           <div class="flex-column">
-            <md-checkbox v-model="checkbox1">New product </md-checkbox>
-            <md-checkbox v-model="checkbox2">Second hand product </md-checkbox>
-            <md-checkbox v-model="checkbox3">Recycled product </md-checkbox
+            <md-checkbox v-model="checkbox1" value="false"> New product </md-checkbox>
+            <md-checkbox v-model="checkbox2" value="false"> Second hand product </md-checkbox>
+            <md-checkbox v-model="checkbox3" value="false"> Recycled product </md-checkbox
             >
           </div>
         </div>
@@ -33,9 +33,13 @@
             <h3>Choose category </h3>
           </div>
           <div class="flex-column">
-            <md-radio v-model="radio1" :value="true" name="category"> Utensils </md-radio>
-            <md-radio v-model="radio2" :value="true" name="category"> Furniture </md-radio>
-            <md-radio v-model="radio3" :value="true" name="category"> Electronics </md-radio>
+          <md-field>
+            <md-select v-model="category" name="category" id="category">
+              <md-option value="utensils">Utensils</md-option>
+              <md-option value="furniture">Furniture</md-option>
+              <md-option value="devices">Digital devices</md-option>
+              </md-select>
+              </md-field>
           </div>
         </div>
 
@@ -46,9 +50,13 @@
             <h3>Select distance range </h3>
           </div>
           <div class="flex-column">
-            <md-radio v-model="radio4" :value="true"> 500 meters </md-radio>
-            <md-radio v-model="radio5" :value="false"> 1 kilometer </md-radio>
-            <md-radio v-model="radio6" :value="true"> more than 1 km</md-radio>
+            <md-field>
+            <md-select v-model="diatance" name="distance" id="distance">
+              <md-option value="500m">500 meters </md-option>
+              <md-option value="1km">1 kilometer </md-option>
+              <md-option value="more">More than 1km </md-option>
+              </md-select>
+              </md-field>
           </div>
         </div>
 
