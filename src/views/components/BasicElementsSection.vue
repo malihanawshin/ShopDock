@@ -1,13 +1,5 @@
 <template>
   <div class="wrapper">
-    <div id="buttons">
-      <div class="title">
-        
-      </div>  
-    </div>
-    <!-- end buttons -->
-    
-    
 
     <!-- Checkboxes/Radios/Toggle -->
     <div id="checkRadios">
@@ -51,7 +43,7 @@
           </div>
           <div class="flex-column">
             <md-field>
-            <md-select v-model="diatance" name="distance" id="distance">
+            <md-select v-model="distance" name="distance" id="distance">
               <md-option value="500m">500 meters </md-option>
               <md-option value="1km">1 kilometer </md-option>
               <md-option value="more">More than 1km </md-option>
@@ -77,9 +69,27 @@
 
   <div class="space-50"></div>
 
+  
+      <div class= "md-layout" align="center">
+         <form class="ui segment large form" align="center">
+            <div class="field" align="center">
+               <div class="ui right icon input large" align="center">
+                  <input
+                     type="text"
+                     placeholder="Enter your address"
+                     v-model="address"
+                     ref="autocomplete"
+                     />
+                  <i class="dot circle link icon" @click="getUserLocation"></i>
+               </div>
+            </div>
+         </form>
+      </div>
+<div class="space-30"></div>
+
   <div class="md-layout" align="center">
         <div class="md-layout-item md-size-66 mx-auto">
-          <md-button class="md-primary"> Search </md-button>
+          <md-button class="md-primary" @click="getUserLocation"> Search </md-button>
         </div>
       </div>
 
@@ -111,6 +121,7 @@
 </template>
 
 <script>
+import { axios } from '@/plugins/axios'
 
 export default {
   components: {
@@ -140,7 +151,45 @@ export default {
         rangeSlider: [20, 60]
       }
     };
+  },
+
+  methods: {
+      getUserLocation(){
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+            this.getStreetAddressFrom(position.coords.latitude,position.coords.longitude);
+          },
+          error => {
+            console.log(error.message);
+          },
+      )
+    },
+
+  async getStreetAddressFrom(lat, long) {
+   try {
+      var {
+         data
+      } = await axios.get(
+         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+         lat +
+         "," +
+         long +
+         "&key={AIzaSyBVbmJZUH8lTESBdihbWk0vjXkc6Ltmx_c}"
+      );
+      if (data.error_message) {
+         console.log(data.error_message)
+      } else {
+         this.address = data.results[0].formatted_address;
+      }
+   } catch (error) {
+      console.log(error.message);
+   }
+}
+
   }
+
 };
 </script>
 
