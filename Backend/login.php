@@ -4,7 +4,7 @@
     $password = $_POST['password'];
 	
 	//Create query
-	$query = "SELECT * FROM users WHERE UserName = '" .$userName. "' and Password = '" . md5($password). "'";
+	$query = "SELECT * FROM Users WHERE UserName = '" .$userName. "' and Password = '" . md5($password). "'";
     $result = $link->query($query);
     if($result->num_rows > 0){
         $return_value = array(
