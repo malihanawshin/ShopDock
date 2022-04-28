@@ -13,20 +13,16 @@
               <p slot="description" class="description">Go business owners!</p>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>face</md-icon>
-                <label>First Name...</label>
-                <md-input v-model="firstname"></md-input>
+                <label>Username...</label>
+                <md-input v-model="userName"></md-input>
               </md-field>
-              <md-field class="md-form-group" slot="inputs">
-                <md-icon>email</md-icon>
-                <label>Email...</label>
-                <md-input v-model="email" type="email"></md-input>
-              </md-field>
+              
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
                 <label>Password...</label>
                 <md-input v-model="password"></md-input>
               </md-field>
-              <md-button href="#/profile" slot="footer" class="md-simple md-success md-lg">
+              <md-button @click= "login" slot="footer" class="md-simple md-success md-lg">
                 Get Started
               </md-button>
             </login-card>
@@ -39,6 +35,7 @@
 
 <script>
 import { LoginCard } from "@/components";
+import { axios } from '@/plugins/axios'
 
 export default {
   components: {
@@ -47,8 +44,7 @@ export default {
   bodyClass: "login-page",
   data() {
     return {
-      firstname: null,
-      email: null,
+      userName: null,
       password: null
     };
   },
@@ -64,7 +60,46 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
-  }
+  },
+ 
+ methods: {
+    login(){
+
+      let formData = new FormData();
+        formData.append('userName', this.userName);
+        formData.append('password', this.password);
+
+        var contact = {};
+        formData.forEach(function(value, key){
+            contact[key] = value;
+        });
+
+        axios({
+            method: 'post',
+            url: 'http://localhost/ShopDock/login.php',
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(function (response) {
+            //handle success
+            console.log(response)
+            if(response.data.code == "200"){
+              //this.$router.push({name:'profile'});
+              window.location.href = 'http://localhost:8080/#/profile';
+            }
+            else{
+              console.log("Login failed!!!")
+            }
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response)
+        });
+
+    }
+ }
+
+
 };
 </script>
 

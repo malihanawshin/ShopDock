@@ -34,8 +34,8 @@
                                 
                 <md-field class="md-form-group" slot="inputs">
                   <md-icon>face</md-icon>
-                  <label>First Name...</label>
-                  <md-input v-model="firstname"></md-input>
+                  <label>Username...</label>
+                  <md-input v-model="userName"></md-input>
                 </md-field>
                 <md-field class="md-form-group" slot="inputs">
                   <md-icon>email</md-icon>
@@ -47,7 +47,7 @@
                   <label>Password...</label>
                   <md-input v-model="password"></md-input>
                 </md-field>
-                <md-button slot="footer" class="md-simple md-success md-lg">
+                <md-button slot="footer" class="md-simple md-success md-lg" @click= "register">
                   Get Started
                 </md-button>
                 <md-button slot="footer" class="md-simple md-success md-lg" href="#/login">
@@ -66,6 +66,7 @@
 <script>
 import BasicElements from "./components/BasicElementsSection";
 import { LoginCard } from "@/components";
+import { axios } from '@/plugins/axios'
 
 export default {
   components: {
@@ -86,20 +87,48 @@ export default {
   },
   data() {
     return {
-      firstname: null,
+      userName: null,
       email: null,
       password: null,
       leafShow: false
     };
   },
   methods: {
-    leafActive() {
-      if (window.innerWidth < 768) {
-        this.leafShow = false;
-      } else {
-        this.leafShow = true;
-      }
-    }
+
+    register() {
+      let formData = new FormData();
+        formData.append('userName', this.userName)
+        formData.append('password', this.password)
+        formData.append('email', this.email)
+        
+        var contact = {};
+        formData.forEach(function(value, key){
+            contact[key] = value;
+        });
+
+        axios({
+            method: 'post',
+            url: 'http://localhost/ShopDock/registration.php',
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(function (response) {
+            //handle success
+            console.log(response)
+            if(response.data.code == "200"){
+              //this.$router.push({name:'login'});
+              window.location.href = 'http://localhost:8080/#/login';
+            }
+            else{
+              console.log("Registration failed!!!")
+            }
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response)
+        });
+    },
+
   },
   computed: {
     headerStyle() {
@@ -112,14 +141,8 @@ export default {
         backgroundImage: `url(${this.signup})`
       };
     }
-  },
-  mounted() {
-    this.leafActive();
-    window.addEventListener("resize", this.leafActive);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.leafActive);
   }
+  
 };
 </script>
 <style lang="scss">

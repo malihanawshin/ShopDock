@@ -13,8 +13,7 @@
           <div class="flex-column">
             <md-checkbox v-model="checkbox1" value="false"> New product </md-checkbox>
             <md-checkbox v-model="checkbox2" value="false"> Second hand product </md-checkbox>
-            <md-checkbox v-model="checkbox3" value="false"> Recycled product </md-checkbox
-            >
+            <md-checkbox v-model="checkbox3" value="false"> Recycled product </md-checkbox>
           </div>
         </div>
         
@@ -176,7 +175,7 @@ export default {
          lat +
          "," +
          long +
-         "&key={AIzaSyBVbmJZUH8lTESBdihbWk0vjXkc6Ltmx_c}"
+         "&key={AIzaSyBa_GXjj0sD7Kz-CxCH_mFJ6b_KeEJWI7k}"
       );
       if (data.error_message) {
          console.log(data.error_message)

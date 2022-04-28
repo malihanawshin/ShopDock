@@ -22,7 +22,6 @@ import VueAxios from './plugins/axios'
 Vue.use(VueAxios)
 import { axios } from '@/plugins/axios'
 
-
 Vue.config.productionTip = false;
 
 Vue.use(MaterialKit);

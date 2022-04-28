@@ -20,117 +20,122 @@
                 <div class="name">
                   <h3 class="title">Kontti</h3>
                   <h6>Second hand shop</h6>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-dribbble"
-                    ><i class="fab fa-dribbble"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-twitter"
-                    ><i class="fab fa-twitter"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-pinterest"
-                    ><i class="fab fa-pinterest"></i
-                  ></md-button>
+                  
                 </div>
               </div>
             </div>
           </div>
           <div class="description text-center">
             <p>
-              An artist of considerable range, Chet Faker — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure.
+              Enter details of your business
             </p>
           </div>
-          <div class="profile-tabs">
-            <tabs
-              :tab-name="['Studio', 'Work', 'Favorite']"
-              :tab-icon="['camera', 'palette', 'favorite']"
-              plain
-              nav-pills-icons
-              color-button="success"
-            >
-              <!-- here you can add your content for tab-content -->
-              <template slot="tab-pane-1">
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane1[0].image" class="rounded" />
-                    <img :src="tabPane1[1].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane1[3].image" class="rounded" />
-                    <img :src="tabPane1[2].image" class="rounded" />
-                  </div>
+            
+              <div id='vueapp' class = "md-layout">
+
+              <form>
+              <br>
+              <div class="flex-column">
+                <label>Vendor Name  </label>
+                <input type="text" name="name" v-model="vendorName">
+              </div>
+              <br>
+
+              <div class="flex-column">
+              <label>Address </label>
+              <input type="text" name="address" v-model="address">
+              </div>
+              <br>
+
+              <div class="flex-column">
+                <label>Website  </label>
+                <input type="text" name="name" v-model="website">
+              </div>
+              <br>
+
+              <div class="flex-column">
+              <label>Phone no </label>
+              <input type="text" name="address" v-model="phone">
+              </div>
+              <br>
+
+              <div class="flex-column">
+                <label>Description of shop </label>
+                <input type="text" name="name" v-model="description">
+              </div>
+              <br>
+
+              <div class="flex-column">
+              <label>Working hours </label>
+              <input type="text" name="address" v-model="workingHours">
+              </div>
+              <br> 
+                
+                <div class="flex-column">
+                  <label>Category of product:  </label>
+                  <input type="checkbox" id="product1" name="categoryId" value="1">
+                  <label for="product1">Utensils </label>
+                  <input type="checkbox" id="product2" name="categoryId" value="2">
+                  <label for="product2">Furniture </label>
+                  <input type="checkbox" id="product3" name="categoryId" value="3">
+                  <label for="product3">Digital devices </label><br>
                 </div>
-              </template>
-              <template slot="tab-pane-2">
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane2[0].image" class="rounded" />
-                    <img :src="tabPane2[1].image" class="rounded" />
-                    <img :src="tabPane2[2].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane2[3].image" class="rounded" />
-                    <img :src="tabPane2[4].image" class="rounded" />
-                  </div>
+                <br>
+                <div class="flex-column">
+                  <label>Type of product:  </label>
+                  <input type="checkbox" id="type1" name="vendorType" value="1">
+                  <label for="type1">New items </label>
+                  <input type="checkbox" id="type2" name="vendorType" value="2">
+                  <label for="type2">Used items </label>
+                  <input type="checkbox" id="type3" name="vendorType" value="3">
+                  <label for="type3">Recycled items </label><br>
                 </div>
-              </template>
-              <template slot="tab-pane-3">
+
+              <br>
+              <div class="flex-column">
+              <label>Price range of product </label>
+              <input type="text" name="priceRange" v-model="priceRange">
+              </div>
+              <br>
+
+              <div class="flex-column">
+              <label>Upload image </label>
+              <input type="file" name="file">
+              </div>
+              <br>
                 <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane3[0].image" class="rounded" />
-                    <img :src="tabPane3[1].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane3[2].image" class="rounded" />
-                    <img :src="tabPane3[3].image" class="rounded" />
-                    <img :src="tabPane3[4].image" class="rounded" />
-                  </div>
-                </div>
-              </template>
-            </tabs>
-          </div>
+        <div class="md-layout-item md-size-66 mx-auto">
+          <md-button class="md-success" click = "@vender_registration"> Submit </md-button>
+        </div>
+      </div>
+
+              </form>
+
+<div class="space-0"></div>
+
+</div>  
+
+<div class="space-100"></div>
         </div>
       </div>
     </div>
   </div>
+
+  
 </template>
 
 <script>
-import { Tabs } from "@/components";
+import { axios } from '@/plugins/axios'
+
 export default {
   components: {
-    Tabs
+    
   },
   bodyClass: "profile-page",
   data() {
     return {
-      tabPane1: [
-        { image: require("@/assets/img/examples/studio-1.jpg") },
-        { image: require("@/assets/img/examples/studio-2.jpg") },
-        { image: require("@/assets/img/examples/studio-4.jpg") },
-        { image: require("@/assets/img/examples/studio-5.jpg") }
-      ],
-      tabPane2: [
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/cynthia-del-rio.jpg") },
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/clem-onojegaw.jpg") }
-      ],
-      tabPane3: [
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/studio-3.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/studio-1.jpg") }
-      ]
+      userName: null,
+      password: null
     };
   },
   props: {
@@ -149,8 +154,46 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
+  },
+
+methods: {
+  vendor_registration(){
+        
+        let formData = new FormData();
+        formData.append('vendorName', this.userName);
+        formData.append('password', this.password);
+
+        var contact = {};
+        formData.forEach(function(value, key){
+            contact[key] = value;
+        });
+
+        axios({
+            method: 'post',
+            url: 'http://localhost/ShopDock/vendor_registration.php',
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(function (response) {
+            //handle success
+            console.log(response)
+            if(response.data.code == "200"){
+              window.location.href = 'http://localhost:8080/#/profile';
+            }
+            else{
+              console.log("Data insertion failed!!!")
+            }
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response)
+        });
   }
+}
+
 };
+
+
 </script>
 
 <style lang="scss" scoped>
