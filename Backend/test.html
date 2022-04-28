@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=no viewport-fit=cover" />
+        <meta http-equiv="Content-Security-Policy" content="media-src * 'self' data:; img-src * 'self' data:; default-src  * 'self' gap:; style-src 'self' 'unsafe-inline'; font-src * 'self' data:;script-src *  'self' 'unsafe-inline' 'unsafe-eval';connect-src * 'unsafe-inline'; ">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(e){
+            // Submit form data via Ajax
+            $("#form").on('submit', function(e){
+                e.preventDefault();
+                var form = $(this)[0];
+                var data = new FormData(form);
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://localhost/ShopDock/upload.php',
+                    data: data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(result){ 
+                        console.log(result.code);
+                        console.log(result.message);
+                    }
+                });
+            });
+        });
+                
+    </script>
+    </head>
+    <body>
+        <form id="form">
+            <input type="text" name="name" id="name"/>
+            <input type="file" name="files[]" id="files" multiple >
+            <input type="submit" name="submit" class="btn btn-success submitBtn" value="SUBMIT"/>
+        </form>
+    </body>
+</html>
