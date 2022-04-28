@@ -10,7 +10,6 @@
 	$description = $_POST['description'];
 	$workingHours = $_POST['workingHours'];
     $latLng = $_POST['latLng'];
-	$password = $_POST['password'];
     $file_loc = $_FILES['file']['tmp_name'];
     $file_size = $_FILES['file']['size'];
     $file_type = $_FILES['file']['type'];
