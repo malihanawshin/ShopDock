@@ -15,17 +15,17 @@
     $file_size = $_FILES['file']['size'];
     $file_type = $_FILES['file']['type'];
     $targetDir = "vendor-images/"; 
-    $fileNames = array_filter($_FILES['files']['name']); 
+    $fileNames = array_filter($_FILES['file']['name']); 
     $allowTypes = array('jpg','png','jpeg','gif'); 
     $uploadedFiles = "";
     if(!empty($fileNames)){ 
-        foreach($_FILES['files']['name'] as $key=>$val){ 
+        foreach($_FILES['file']['name'] as $key=>$val){ 
             $fileName = basename($fileNames[$key]); 
             $targetFilePath = $targetDir . $fileName; 
 
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
             if(in_array($fileType, $allowTypes)){
-                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
+                if(move_uploaded_file($_FILES["file"]["tmp_name"][$key], $targetFilePath)){ 
                     $uploadedFiles .= "'" .$fileName."',";
                 }
             }
