@@ -15,47 +15,27 @@
     $file_size = $_FILES['file']['size'];
     $file_type = $_FILES['file']['type'];
     $targetDir = "vendor-images/"; 
-    $fileNames = array_filter($_FILES['file']['name']); 
-    $allowTypes = array('jpg','png','jpeg','gif'); 
-    $uploadedFiles = "";
-    if(!empty($fileNames)){ 
-        foreach($_FILES['file']['name'] as $key=>$val){ 
-            $fileName = basename($fileNames[$key]); 
-            $targetFilePath = $targetDir . $fileName; 
-
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-            if(in_array($fileType, $allowTypes)){
-                if(move_uploaded_file($_FILES["file"]["tmp_name"][$key], $targetFilePath)){ 
-                    $uploadedFiles .= "'" .$fileName."',";
-                }
-            }
-
-        }
-        $uploadedFiles = substr($uploadedFiles, 0, strlen($uploadedFiles) - 1);
-    }
-    if(strlen($uploadedFiles) > 0){ 
-        $query = "INSERT INTO Vendors(VendorId, VendorName, CategoryId, Address, Phone, Website, PriceRange, VendorTypeId, Image, Description, WorkingHours, Latitude, Logitude) VALUES(null, '".$vendorName."', '".$categoryId."', '".$address."', '".$phone."', '".$website."', '".$priceRange."', '".$vendorType."', '".$uploadedFiles."', '".$description."', '".$workingHours."', '".$latitude."', '".$longitude."')";
+    $fileName = $_FILES['file']['name']; 
+    if($fileName){
+        $targetFilePath = $targetDir . $fileName; 
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){ 
+            $query = "INSERT INTO Vendors(VendorId, VendorName, CategoryId, Address, Phone, Website, PriceRange, VendorTypeId, Image, Description, WorkingHours, Latitude, Logitude) VALUES(null, '".$vendorName."', '".$categoryId."', '".$address."', '".$phone."', '".$website."', '".$priceRange."', '".$vendorType."', '".$fileName."', '".$description."', '".$workingHours."', '".$latitude."', '".$longitude."')";
     
-        $result = $link->query($query);
-        if(!$result){
-            $return_value = array(
-                'code' => 403,
-                'message' => mysqli_error()
-            );
-            echo json_encode($return_value);
-        }else{
-            $return_value = array(
-                'code' => 200,
-                'message' => "data inserted"
-            );
-            echo json_encode($return_value);
+            $result = $link->query($query);
+            if(!$result){
+                $return_value = array(
+                    'code' => 403,
+                    'message' => mysqli_error()
+                );
+                echo json_encode($return_value);
+            }else{
+                $return_value = array(
+                    'code' => 200,
+                    'message' => "data inserted"
+                );
+                echo json_encode($return_value);
+            }
+            $link->close();
         }
-    }else{ 
-        $return_value = array(
-            'code' => 400,
-            'message' => "Image upload failed"
-        );
-        echo json_encode($return_value);
     }
-    $link->close();
 ?>
