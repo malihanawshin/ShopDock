@@ -35,7 +35,8 @@
 
 <script>
 import { LoginCard } from "@/components";
-import { axios } from '@/plugins/axios'
+import { axios } from '@/plugins/axios';
+
 
 export default {
   components: {
@@ -51,7 +52,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg")
+      default: require("@/assets/img/city-header.jpg")
     }
   },
   computed: {

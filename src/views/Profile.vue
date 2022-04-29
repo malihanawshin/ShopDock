@@ -68,21 +68,21 @@
                 
                 <div class="flex-column">
                   <label>Category of product:  </label>
-                  <input type="checkbox" id="product1" name="categoryId" value="1">
+                  <input type="checkbox" id="product1" name="categoryId[]" value="1">
                   <label for="product1">Utensils </label>
-                  <input type="checkbox" id="product2" name="categoryId" value="2">
+                  <input type="checkbox" id="product2" name="categoryId[]" value="2">
                   <label for="product2">Furniture </label>
-                  <input type="checkbox" id="product3" name="categoryId" value="3">
+                  <input type="checkbox" id="product3" name="categoryId[]" value="3">
                   <label for="product3">Digital devices </label><br>
                 </div>
                 <br>
                 <div class="flex-column">
                   <label>Type of product:  </label>
-                  <input type="checkbox" id="type1" name="vendorType" value="1">
+                  <input type="checkbox" id="type1" name="vendorType[]" value="1">
                   <label for="type1">New items </label>
-                  <input type="checkbox" id="type2" name="vendorType" value="2">
+                  <input type="checkbox" id="type2" name="vendorType[]" value="2">
                   <label for="type2">Used items </label>
-                  <input type="checkbox" id="type3" name="vendorType" value="3">
+                  <input type="checkbox" id="type3" name="vendorType[]" value="3">
                   <label for="type3">Recycled items </label><br>
                 </div>
 
@@ -95,7 +95,7 @@
 
               <div class="flex-column">
               <label>Upload image </label>
-              <input type="file" name="file" @change="handleUpload($event.target.files)">
+              <input type="file" name="file[]" @change="handleUpload($event.target.files)">
               </div>
               <br>
 
@@ -153,11 +153,11 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/city-profile.jpg")
+      default: require("@/assets/img/city-header.jpg")
     },
     img: {
       type: String,
-      default: require("@/assets/img/city-header.jpg")
+      default: require("@/assets/img/Logo.png")
     }
   },
   computed: {
@@ -175,7 +175,7 @@ methods: {
   vendor_registration(){
         console.log("here ");
         let formData = new FormData();
-        formData.append('vendorName', this.userName);
+        formData.append('vendorName', this.vendorName);
         formData.append('categoryId', this.categoryId);
         formData.append('address', this.address);
         formData.append('phone', this.phone);

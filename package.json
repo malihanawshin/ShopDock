@@ -12,6 +12,7 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run dev"
   },
   "dependencies": {
+    "@smartweb/vue-flash-message": "^0.6.10",
     "axios": "^0.27.2",
     "core-js": "3.5.0",
     "nouislider": "14.1.0",
