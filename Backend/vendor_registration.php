@@ -19,7 +19,7 @@
     if($fileName){
         $targetFilePath = $targetDir . $fileName; 
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){ 
-            $query = "INSERT INTO Vendors(VendorId, VendorName, CategoryId, Address, Phone, Website, PriceRange, VendorTypeId, Image, Description, WorkingHours, Latitude, Logitude) VALUES(null, '".$vendorName."', '".$categoryId."', '".$address."', '".$phone."', '".$website."', '".$priceRange."', '".$vendorType."', '".$fileName."', '".$description."', '".$workingHours."', '".$latitude."', '".$longitude."')";
+            $query = "INSERT INTO Vendors(VendorId, VendorName, CategoryId, Address, Phone, Website, PriceRange, VendorTypeId, Image, Description, WorkingHours, Latitude, Longitude) VALUES(null, '".$vendorName."', '".$categoryId."', '".$address."', '".$phone."', '".$website."', '".$priceRange."', '".$vendorType."', '".$fileName."', '".$description."', '".$workingHours."', '".$latitude."', '".$longitude."')";
     
             $result = $link->query($query);
             if(!$result){
