@@ -82,7 +82,7 @@ export default {
     },
     signup: {
       type: String,
-      default: require("@/assets/img/city.jpg")
+      default: require("@/assets/img/store.jpg")
     },
   },
   data() {

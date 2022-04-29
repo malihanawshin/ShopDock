@@ -34,7 +34,7 @@
                 v-if="showDownload"
               >
                 <i class="material-icons">content_paste</i>
-                <p>About us</p>
+                <p></p>
               </md-list-item>
 
               <md-list-item
@@ -70,8 +70,8 @@
                         </li>
                         <li>
                           <a href="#/landing">
-                            <i class="material-icons">fingerprint</i>
-                            <p>About Us</p>
+                            
+                            <p></p>
                           </a>
                         </li>
                         <li>

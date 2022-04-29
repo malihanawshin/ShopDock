@@ -9,7 +9,7 @@
         <ul>
           <li>
             <a href="#/landing">
-              About Us
+              
             </a>
           </li>
           <li>

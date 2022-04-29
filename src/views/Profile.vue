@@ -68,21 +68,21 @@
                 
                 <div class="flex-column">
                   <label>Category of product:  </label>
-                  <input type="checkbox" id="product1" name="categoryId[]" value="1">
-                  <label for="product1">Utensils </label>
-                  <input type="checkbox" id="product2" name="categoryId[]" value="2">
-                  <label for="product2">Furniture </label>
-                  <input type="checkbox" id="product3" name="categoryId[]" value="3">
-                  <label for="product3">Digital devices </label><br>
+                  <input type="checkbox" class="product" name="categoryId[]" value="1">
+                  <label for="product">Utensils </label>
+                  <input type="checkbox" class="product" name="categoryId[]" value="2">
+                  <label for="product">Furniture </label>
+                  <input type="checkbox" class="product" name="categoryId[]" value="3">
+                  <label for="product">Digital devices </label><br>
                 </div>
                 <br>
                 <div class="flex-column">
                   <label>Type of product:  </label>
-                  <input type="checkbox" id="type1" name="vendorType[]" value="1">
+                  <input type="checkbox" class="vendor" name="vendorType[]" value="1">
                   <label for="type1">New items </label>
-                  <input type="checkbox" id="type2" name="vendorType[]" value="2">
+                  <input type="checkbox" class="vendor" name="vendorType[]" value="2">
                   <label for="type2">Used items </label>
-                  <input type="checkbox" id="type3" name="vendorType[]" value="3">
+                  <input type="checkbox" class="vendor" name="vendorType[]" value="3">
                   <label for="type3">Recycled items </label><br>
                 </div>
 
@@ -173,7 +173,27 @@ methods: {
           this.file = files[0];
         },
   vendor_registration(){
-        console.log("here ");
+        var products = document.querySelectorAll('.product:checked');
+        this.categoryId = "";
+        for(var i = 0; i < products.length ; i ++){
+            if(i + 1 == products.length){
+                this.categoryId += products[i].value;
+            }else{
+                this.categoryId += products[i].value + ",";
+            }
+        }
+
+        var vendors = document.querySelectorAll('.vendor:checked');
+        this.vendorType = "";
+        for(var i = 0; i < vendors.length ; i ++){
+            if(i + 1 == vendors.length){
+                this.vendorType += vendors[i].value;
+            }else{
+                this.vendorType += vendors[i].value + ",";
+            }
+        }
+
+        console.log(this.categoryId);
         let formData = new FormData();
         formData.append('vendorName', this.vendorName);
         formData.append('categoryId', this.categoryId);

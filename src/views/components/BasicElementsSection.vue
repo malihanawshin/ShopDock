@@ -11,10 +11,20 @@
             <h3>Choose product type </h3>
           </div>
           <div class="flex-column">
-            <md-checkbox v-model="checkbox1" value="false"> New product </md-checkbox>
-            <md-checkbox v-model="checkbox2" value="false"> Second hand product </md-checkbox>
-            <md-checkbox v-model="checkbox3" value="false"> Recycled product </md-checkbox>
-          </div>
+                  <div class="item">
+                    <input type="checkbox" class="vendor" name="vendorType[]" value="1">
+                    <label for="type1">New items </label>
+                  </div>
+                  <div class="item">
+                  <input type="checkbox" class="vendor" name="vendorType[]" value="2">
+                  <label for="type2">Used items </label>
+                  </div>
+                  <div class="item">
+                  <input type="checkbox" class="vendor" name="vendorType[]" value="3">
+                  <label for="type3">Recycled items </label>
+                  </div>
+                </div>
+
         </div>
         
         <div
@@ -26,9 +36,9 @@
           <div class="flex-column">
           <md-field>
             <md-select v-model="category" name="category" id="category">
-              <md-option value="utensils">Utensils</md-option>
-              <md-option value="furniture">Furniture</md-option>
-              <md-option value="devices">Digital devices</md-option>
+              <md-option value="1"> Utensils </md-option>
+              <md-option value="2"> Furniture </md-option>
+              <md-option value="3"> Digital devices </md-option>
               </md-select>
               </md-field>
           </div>
@@ -43,9 +53,9 @@
           <div class="flex-column">
             <md-field>
             <md-select v-model="distance" name="distance" id="distance">
-              <md-option value="500m">500 meters </md-option>
-              <md-option value="1km">1 kilometer </md-option>
-              <md-option value="more">More than 1km </md-option>
+              <md-option value="500"> 500 meters </md-option>
+              <md-option value="1000"> 1 kilometer </md-option>
+              <md-option value="1001"> More than 1km </md-option>
               </md-select>
               </md-field>
           </div>
@@ -69,21 +79,6 @@
   <div class="space-50"></div>
 
   
-      <div class= "md-layout" align="center">
-         <form class="ui segment large form" align="center">
-            <div class="field" align="center">
-               <div class="ui right icon input large" align="center">
-                  <input
-                     type="text"
-                     placeholder="Enter your address"
-                     v-model="address"
-                     ref="autocomplete"
-                     />
-                  <i class="dot circle link icon" @click="getUserLocation"></i>
-               </div>
-            </div>
-         </form>
-      </div>
 <div class="space-30"></div>
 
   <div class="md-layout" align="center">
@@ -100,18 +95,21 @@
           :class="{ 'text-center': responsive }"
         >
           
+          <div v-for="item in items" :key="item.message">
           <img
-            :src="image"
+            v-bind:src="'http://localhost/ShopDock/vendor-images/' + item.Image"
             alt="Rounded Image"
             class="rounded"
             :class="{ 'responsive-image': responsive }"
           />
-          <div>
-            <h4>Shop name: </h4>
-            <h4>Location: </h4>
-            <h4>Price range: </h4>
+                <h4><b>Shop name: {{item.VendorName}} </b></h4>
+                <h4>Address: {{item.Address}} </h4>
+                <h4>Price range: {{item.PriceRange}} </h4>
+                <h4>Working hours: {{item.WorkingHours}} </h4>
+                <br>
           </div>
 
+          
         </div>
   </div>
 
@@ -127,9 +125,17 @@ export default {
   },
   data() {
     return {
+      items: null,
+      name: null,
+      price: null,
+      location: null,
       image: require("@/assets/img/faces/shopImg.jpg"),
       initial: null,
       floatingLabel: null,
+      vendorType: null,
+      LatLong: null,
+      distance: 0,
+      category: null,
       success: null,
       error: null,
       withMIcon: null,
@@ -138,9 +144,7 @@ export default {
       checkbox2: null,
       checkbox3: true,
       checkbox4: null,
-      radio1: true,
-      radio2: false,
-      switch1: true,
+      switch1: null,
       switch2: null,
       amount: 30,
       amount2: 60,
@@ -158,13 +162,83 @@ export default {
           position => {
             console.log(position.coords.latitude);
             console.log(position.coords.longitude);
-            this.getStreetAddressFrom(position.coords.latitude,position.coords.longitude);
+            //this.getStreetAddressFrom(position.coords.latitude,position.coords.longitude);
+            this.LatLong = position.coords.latitude + "," + position.coords.longitude;
+            this.search();
           },
           error => {
             console.log(error.message);
           },
       )
     },
+    
+    async mounted(){
+
+    let result = await axios.get("http://localhost:8080/#/");
+    console.log("result");
+    
+    },
+
+  search(){
+
+    var results;
+    var vendors = document.querySelectorAll('.vendor:checked');
+        this.vendorType = "";
+        for(var i = 0; i < vendors.length ; i ++){
+            if(i + 1 == vendors.length){
+                this.vendorType += vendors[i].value;
+            }else{
+                this.vendorType += vendors[i].value + ",";
+            }
+        }
+        console.log("vendor:" + this.vendorType);
+        console.log("product:" + this.category);
+        console.log("distance:" + this.distance);
+        console.log("ltlng:" + this.LatLong);
+
+        let formData = new FormData();
+        formData.append('productType', this.vendorType);
+        formData.append('category', this.category);
+        formData.append('distance', this.distance);
+        formData.append('userLatlng',this.LatLong);
+
+        if(parseInt(this.distance) == 1001){
+          formData.append('comparator', "more")
+        }else{
+          formData.append('comparator', "less")
+        }
+        var that = this;
+         axios({
+            method: 'post',
+            url: 'http://localhost/ShopDock/vendor-search.php',
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(function (response) {
+            //handle success
+            console.log(response)
+            if(response.data.code == "200"){
+              window.location.href = 'http://localhost:8080/#/';
+              
+              that.items = response.data.message;
+
+              that.name = response.data.message[0].VendorName;
+              that.address = response.data.message[0].Address;
+              that.price = response.data.message[0].PriceRange;
+            }
+            else{
+              console.log("Data fetch failed!!!")
+            }
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response)
+        });
+
+
+  },
+
+
 
   async getStreetAddressFrom(lat, long) {
    try {
